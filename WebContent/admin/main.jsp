@@ -122,6 +122,15 @@
 			<a href="javascript:openTab('商品大类管理','productBigTypeManage.jsp','icon-product')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-manage'" style="width: 150px;">管理商品大类</a>
 			<a href="javascript:openTab('商品小类管理','productSmallTypeManage.jsp','icon-product')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-manage'" style="width: 150px;">管理商品小类</a>
 		</div>
+
+		<div title="套餐商品管理"  data-options="iconCls:'icon-product'" style="padding:10px">
+			<a href="javascript:openTab('套餐商品管理','combinationProductManage.jsp','icon-product')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-manage'" style="width: 150px;">套餐商品管理</a>
+		</div>
+
+		<div title="套餐管理"  data-options="iconCls:'icon-gift'" style="padding:10px">
+			<a href="javascript:openTab('套餐管理','combinationManage.jsp','icon-gift')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-manage'" style="width: 150px;">套餐管理</a>
+		</div>
+
 		<div title="订单管理"  data-options="iconCls:'icon-order'" style="padding:10px">
 			<a href="javascript:openTab('订单管理','orderManage.jsp','icon-order')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-manage'" style="width: 150px;">管理订单</a>
 		</div>
