@@ -39,6 +39,7 @@ public class Product {
 	//与商品订单实体一对多
 	private List<OrderProduct>orderProductList=new ArrayList<OrderProduct>(); // 中间表集合
 	private int hot; // 是否热卖
+	private int combine;
 	private Date hotTime; // 设置热卖时间
 	private int specialPrice; // 是否特价
 	private Date specialPriceTime; // 设置特价时间
@@ -144,6 +145,12 @@ public class Product {
 	}
 	public void setSpecialPrice(int specialPrice) {
 		this.specialPrice = specialPrice;
+	}
+	public int getCombine() {
+		return combine;
+	}
+	public void setCombine(int combine) {
+		this.combine = combine;
 	}
 	
 	

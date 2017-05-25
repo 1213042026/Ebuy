@@ -412,6 +412,17 @@ public class ProductAction extends ActionSupport  implements ServletRequestAware
 		ResponseUtil.write(ServletActionContext.getResponse(), result);
 		return null;
 	}
+
+	public String setProductWithCombine()throws Exception{
+		JSONObject result=new JSONObject();
+		String []idsStr=ids.split(",");
+		for(int i=0;i<idsStr.length;i++){
+			productService.setProductWithCombine(Integer.parseInt(idsStr[i]));
+		}
+		result.put("success", true);
+		ResponseUtil.write(ServletActionContext.getResponse(), result);
+		return null;
+	}
 	
 	/**
 	 * 设置商品为热卖商品

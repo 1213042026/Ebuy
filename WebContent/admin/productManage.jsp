@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/icon.css">
+<style type="text/css">
+	a.l-btn span span.icon-gift {
+		background-size: 16px;
+	}
+</style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
@@ -57,6 +62,13 @@
 			return "否";
 		}
 	}
+	function formatCombine(val,row){
+		if(val==1){
+			return "是";
+		}else{
+			return "否";
+		}
+	}
 	//格式化特价商品
 	function formatSpecialPrice(val,row){
 		if(val==1){
@@ -84,6 +96,7 @@
 		$("#stock").val(row.stock);
 		$("#proPic").val(row.proPic);
 		$("#hot").val(row.hot);
+		$("#combine").val(row.combine);
 		$("#hotTime").val(row.hotTime);
 		$("#specialPrice").val(row.specialPrice);
 		$("#specialPriceTime").val(row.specialPriceTime);
@@ -136,6 +149,7 @@
 		$("#id").val("");
 		$("#proPic").val("");
 		$("#hot").val("");
+		$("#combine").val("");
 		$("#hotTime").val("");
 		$("#specialPrice").val("");
 		$("#specialPriceTime").val("");
@@ -195,6 +209,30 @@
 			}
 		});
 	}
+	function setProductCombine(){
+		var selectedRows=$("#dg").datagrid('getSelections');
+		if(selectedRows.length==0){
+			$.messager.alert("系统提示","请选择要设置为套餐商品的商品！");
+			return;
+		}
+		var strIds=[];
+		for(var i=0;i<selectedRows.length;i++){
+			strIds.push(selectedRows[i].id);
+		}
+		var ids=strIds.join(",");
+		$.messager.confirm("系统提示","您确认要设置这<font color=red>"+selectedRows.length+"</font>个商品为套餐商品吗？",function(r){
+			if(r){
+				$.post("product_setProductWithCombine.action",{ids:ids},function(result){
+					if(result.success){
+						$.messager.alert("系统提示","已设置成功！");
+						$("#dg").datagrid("reload");
+					}else{
+						$.messager.alert("系统提示","设置失败！");
+					}
+				},"json");
+			}
+		});
+	}
 	//设置特价商品
 	function setProductSpecialPrice(){
 		var selectedRows=$("#dg").datagrid('getSelections');
@@ -239,6 +277,7 @@
 	 		<th field="bigType.id" width="100" align="center" formatter="formatBigTypeId" hidden="true">所属商品大类id</th>
 	 		<th field="bigType.name" width="100" align="center" formatter="formatBigTypeName">所属商品大类</th>
 	 		<th field="hot" width="50" align="center" formatter="formatHot">是否热卖</th>
+	 		<th field="combine" width="80" align="center" formatter="formatCombine">是否为套餐商品</th>
 	 		<th field="specialPrice" width="50" align="center" formatter="formatSpecialPrice">是否特价</th>
 	 		<th field="description" width="50" align="center" hidden="true">描述</th>
 	 		<th field="hotTime" width="50" align="center" hidden="true">设置热卖时间</th>
@@ -253,6 +292,7 @@
 			<a href="javascript:openProductModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
 			<a href="javascript:deleteProduct()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 			<a href="javascript:setProductHot()" class="easyui-linkbutton" iconCls="icon-hot" plain="true">设置为热卖</a>
+			<a href="javascript:setProductCombine()" class="easyui-linkbutton" iconCls="icon-gift" plain="true">设置为套餐商品</a>
 			<a href="javascript:setProductSpecialPrice()" class="easyui-linkbutton" iconCls="icon-special" plain="true">设置为特价</a>
 		</div>
 		<div>
@@ -299,6 +339,7 @@
 	 					<textarea rows="5" cols="50" id="description" name="product.description"></textarea>
 	 					<input type="hidden" id="proPic" name="product.proPic"/>
 	 					<input type="hidden" id="hot" name="product.hot"/>
+	 					<input type="hidden" id="combine" name="product.combine"/>
 	 					<input type="hidden" id="hotTime" name="product.hotTime"/>
 	 					<input type="hidden" id="specialPrice" name="product.specialPrice"/>
 	 					<input type="hidden" id="specialPriceTime" name="product.specialPriceTime"/>

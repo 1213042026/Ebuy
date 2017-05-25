@@ -53,6 +53,9 @@ public class ProductServiceImpl implements ProductService {
 			if(s_product.getHot()==1){
 				hql.append(" and hot =1 order by hotTime desc ");
 			}
+			if(s_product.getCombine()==1){
+				hql.append(" and combine =1");
+			}
 		}
 		if(pageBean!=null){
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
@@ -109,6 +112,12 @@ public class ProductServiceImpl implements ProductService {
 		Product product=baseDAO.get(Product.class, productId);
 		product.setHot(1);
 		product.setHotTime(new Date());
+		baseDAO.save(product);
+	}
+	public void setProductWithCombine(int productId) {
+		// TODO Auto-generated method stub
+		Product product=baseDAO.get(Product.class, productId);
+		product.setCombine(1);
 		baseDAO.save(product);
 	}
 	//设置商品为特价

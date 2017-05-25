@@ -56,6 +56,7 @@ public interface ProductService {
 	 * @param productId
 	 */
 	public void setProductWithHot(int productId);
+	public void setProductWithCombine(int productId);
 	
 	/**
 	 * 设置商品为特价

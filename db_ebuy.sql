@@ -173,6 +173,7 @@ CREATE TABLE `t_product` (
   `stock` int(11) NOT NULL,
   `bigTypeId` int(11) default NULL,
   `smallTypeId` int(11) default NULL,
+  `combine` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `FK_2vciohqujaeij91ujm5va2xs4` (`bigTypeId`),
   KEY `FK_qexns4el8esjqbdrqfys82ih8` (`smallTypeId`),
@@ -183,32 +184,32 @@ CREATE TABLE `t_product` (
 -- ----------------------------
 -- Records of t_product
 -- ----------------------------
-INSERT INTO `t_product` VALUES ('1', '正宗土蜂糖', '0', null, '正宗土蜂糖', '168', 'images/product/20170517041637.jpg', '0', null, '5000', '1', '31');
-INSERT INTO `t_product` VALUES ('2', '软糯，香甜', '0', null, '竹叶黄粑', '88', 'images/product/20170517041721.jpg', '0', null, '5000', '2', '34');
-INSERT INTO `t_product` VALUES ('3', '', '0', null, '老干妈', '8', 'images/product/20170517041538.jpg', '0', null, '5000', '2', '34');
-INSERT INTO `t_product` VALUES ('4', '贵州名贵中药材', '0', null, '野生林芝', '130', 'images/product/20170517041810.jpg', '0', null, '5000', '2', '34');
-INSERT INTO `t_product` VALUES ('5', '贵州名优特产', '0', null, '黑糯米粑', '88', 'images/product/20170517041855.jpg', '1', '2017-05-17 16:53:19', '5000', '2', '34');
-INSERT INTO `t_product` VALUES ('6', '开袋即食', '0', null, '香酥辣椒', '30', 'images/product/20170517041952.jpg', '0', null, '5000', '2', '34');
-INSERT INTO `t_product` VALUES ('7', '', '0', null, '习酒15年', '1288', 'images/product/20170517044626.jpg', '0', null, '2000', '1', '32');
-INSERT INTO `t_product` VALUES ('8', '', '0', null, '银质习酒', '120', 'images/product/20170517044708.jpg', '0', null, '2000', '1', '32');
-INSERT INTO `t_product` VALUES ('9', '', '0', null, '习酒天辰', '888', 'images/product/20170517044747.jpg', '0', null, '2000', '1', '32');
-INSERT INTO `t_product` VALUES ('10', '', '0', null, '贵州茅台酒', '1200', 'images/product/20170517044821.jpg', '0', null, '2000', '1', '32');
-INSERT INTO `t_product` VALUES ('11', '', '0', null, '飞天茅台典藏', '19000', 'images/product/20170517044858.jpg', '0', null, '2000', '1', '32');
-INSERT INTO `t_product` VALUES ('12', '', '0', null, '茅台15年', '19999', 'images/product/20170517044932.jpg', '0', null, '2000', '1', '32');
-INSERT INTO `t_product` VALUES ('13', '', '0', null, '竹荪', '60', 'images/product/20170517045020.jpg', '0', null, '5000', '2', '34');
-INSERT INTO `t_product` VALUES ('14', '', '0', null, '野生天麻', '128', 'images/product/20170517045101.jpg', '0', null, '2000', '2', '34');
-INSERT INTO `t_product` VALUES ('15', '', '0', null, '丝娃娃', '10', 'images/product/20170517045131.jpg', '1', '2017-05-17 16:53:30', '5000', '2', '33');
-INSERT INTO `t_product` VALUES ('16', '', '0', null, '五彩糯米饭', '10', 'images/product/20170517045201.jpg', '1', '2017-05-17 16:53:30', '5000', '2', '33');
-INSERT INTO `t_product` VALUES ('17', '', '1', '2017-05-17 16:54:13', '冲冲糕', '15', 'images/product/20170517045232.jpg', '0', null, '5000', '2', '33');
-INSERT INTO `t_product` VALUES ('18', '', '0', null, '羊肉粉', '18', 'images/product/20170517045301.jpg', '0', null, '5000', '2', '33');
-INSERT INTO `t_product` VALUES ('19', '', '1', '2017-05-17 16:54:13', '刷把头', '20', 'images/product/20170517045404.jpg', '0', null, '5000', '2', '33');
-INSERT INTO `t_product` VALUES ('20', '', '0', null, '湄潭翠芽', '688', 'images/product/20170517045441.jpg', '0', null, '5000', '1', '31');
-INSERT INTO `t_product` VALUES ('21', '', '0', null, '都匀毛尖', '288', 'images/product/20170517045516.jpg', '0', null, '2000', '1', '31');
-INSERT INTO `t_product` VALUES ('22', '', '0', null, '湄潭翠芽典藏', '1000', 'images/product/20170517045552.jpg', '0', null, '2000', '1', '31');
-INSERT INTO `t_product` VALUES ('23', '', '0', null, '肠旺面', '18', 'images/product/20170517045656.jpg', '0', null, '5000', '2', '33');
-INSERT INTO `t_product` VALUES ('24', '', '1', '2017-05-18 10:53:55', '去', '12', 'images/product/20150922062127.jp', '1', '2017-05-18 10:54:01', '2222', '1', '31');
-INSERT INTO `t_product` VALUES ('25', 'i', '0', null, 'u', '7', 'images/product/20170520075434.jpg', '0', null, '8', '1', '31');
-INSERT INTO `t_product` VALUES ('26', 'testfor', '0', null, 'test', '1', 'images/product/20170520080933.jpg', '0', null, '12', '2', '33');
+INSERT INTO `t_product` VALUES ('1', '正宗土蜂糖', '0', null, '正宗土蜂糖', '168', 'images/product/20170517041637.jpg', '0', null, '5000', '1', '31', '1');
+INSERT INTO `t_product` VALUES ('2', '软糯，香甜', '0', null, '竹叶黄粑', '88', 'images/product/20170517041721.jpg', '0', null, '5000', '2', '34', '1');
+INSERT INTO `t_product` VALUES ('3', '', '0', null, '老干妈', '8', 'images/product/20170517041538.jpg', '0', null, '5000', '2', '34', '1');
+INSERT INTO `t_product` VALUES ('4', '贵州名贵中药材', '0', null, '野生林芝', '130', 'images/product/20170517041810.jpg', '0', null, '5000', '2', '34', '0');
+INSERT INTO `t_product` VALUES ('5', '贵州名优特产', '0', null, '黑糯米粑', '88', 'images/product/20170517041855.jpg', '1', '2017-05-17 16:53:19', '5000', '2', '34', '1');
+INSERT INTO `t_product` VALUES ('6', '开袋即食', '0', null, '香酥辣椒', '30', 'images/product/20170517041952.jpg', '0', null, '5000', '2', '34', '1');
+INSERT INTO `t_product` VALUES ('7', '', '0', null, '习酒15年', '1288', 'images/product/20170517044626.jpg', '0', null, '2000', '1', '32', '0');
+INSERT INTO `t_product` VALUES ('8', '', '0', null, '银质习酒', '120', 'images/product/20170517044708.jpg', '0', null, '2000', '1', '32', '1');
+INSERT INTO `t_product` VALUES ('9', '', '0', null, '习酒天辰', '888', 'images/product/20170517044747.jpg', '0', null, '2000', '1', '32', '1');
+INSERT INTO `t_product` VALUES ('10', '', '0', null, '贵州茅台酒', '1200', 'images/product/20170517044821.jpg', '0', null, '2000', '1', '32', '0');
+INSERT INTO `t_product` VALUES ('11', '', '0', null, '飞天茅台典藏', '19000', 'images/product/20170517044858.jpg', '0', null, '2000', '1', '32', '0');
+INSERT INTO `t_product` VALUES ('12', '', '0', null, '茅台15年', '19999', 'images/product/20170517044932.jpg', '0', null, '2000', '1', '32', '0');
+INSERT INTO `t_product` VALUES ('13', '', '0', null, '竹荪', '60', 'images/product/20170517045020.jpg', '0', null, '5000', '2', '34', '0');
+INSERT INTO `t_product` VALUES ('14', '', '0', null, '野生天麻', '128', 'images/product/20170517045101.jpg', '0', null, '2000', '2', '34', '0');
+INSERT INTO `t_product` VALUES ('15', '', '0', null, '丝娃娃', '10', 'images/product/20170517045131.jpg', '1', '2017-05-17 16:53:30', '5000', '2', '33', '0');
+INSERT INTO `t_product` VALUES ('16', '', '0', null, '五彩糯米饭', '10', 'images/product/20170517045201.jpg', '1', '2017-05-17 16:53:30', '5000', '2', '33', '0');
+INSERT INTO `t_product` VALUES ('17', '', '1', '2017-05-17 16:54:13', '冲冲糕', '15', 'images/product/20170517045232.jpg', '0', null, '5000', '2', '33', '0');
+INSERT INTO `t_product` VALUES ('18', '', '0', null, '羊肉粉', '18', 'images/product/20170517045301.jpg', '0', null, '5000', '2', '33', '0');
+INSERT INTO `t_product` VALUES ('19', '', '1', '2017-05-17 16:54:13', '刷把头', '20', 'images/product/20170517045404.jpg', '0', null, '5000', '2', '33', '0');
+INSERT INTO `t_product` VALUES ('20', '', '0', null, '湄潭翠芽', '688', 'images/product/20170517045441.jpg', '0', null, '5000', '1', '31', '0');
+INSERT INTO `t_product` VALUES ('21', '', '0', null, '都匀毛尖', '288', 'images/product/20170517045516.jpg', '0', null, '2000', '1', '31', '0');
+INSERT INTO `t_product` VALUES ('22', '', '0', null, '湄潭翠芽典藏', '1000', 'images/product/20170517045552.jpg', '0', null, '2000', '1', '31', '0');
+INSERT INTO `t_product` VALUES ('23', '', '0', null, '肠旺面', '18', 'images/product/20170517045656.jpg', '0', null, '5000', '2', '33', '0');
+INSERT INTO `t_product` VALUES ('24', '', '1', '2017-05-18 10:53:55', '去', '12', 'images/product/20150922062127.jp', '1', '2017-05-18 10:54:01', '2222', '1', '31', '0');
+INSERT INTO `t_product` VALUES ('25', 'i', '0', null, 'u', '7', 'images/product/20170520075434.jpg', '0', null, '8', '1', '31', '0');
+INSERT INTO `t_product` VALUES ('26', 'testfor', '0', null, 'test', '1', 'images/product/20170520080933.jpg', '0', null, '12', '2', '33', '0');
 
 -- ----------------------------
 -- Table structure for t_smalltype
