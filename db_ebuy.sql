@@ -183,7 +183,7 @@ CREATE TABLE `t_product` (
 -- ----------------------------
 -- Records of t_product
 -- ----------------------------
-INSERT INTO `t_product` VALUES ('1', '正宗土蜂糖', '0', null, '正宗土蜂糖', '168', 'images/product/20170517041637.jpg', '0', null, '5000', '1', '34');
+INSERT INTO `t_product` VALUES ('1', '正宗土蜂糖', '0', null, '正宗土蜂糖', '168', 'images/product/20170517041637.jpg', '0', null, '5000', '1', '31');
 INSERT INTO `t_product` VALUES ('2', '软糯，香甜', '0', null, '竹叶黄粑', '88', 'images/product/20170517041721.jpg', '0', null, '5000', '2', '34');
 INSERT INTO `t_product` VALUES ('3', '', '0', null, '老干妈', '8', 'images/product/20170517041538.jpg', '0', null, '5000', '2', '34');
 INSERT INTO `t_product` VALUES ('4', '贵州名贵中药材', '0', null, '野生林芝', '130', 'images/product/20170517041810.jpg', '0', null, '5000', '2', '34');
@@ -270,4 +270,4 @@ CREATE TABLE `t_user` (
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('1', '山西太原尖草坪', '1976-09-04 00:00:00', '411522199407254576', 'admin@qq.com', '13523902576', 'admin', '女', '2', '张三', 'admin');
-INSERT INTO `t_user` VALUES ('22', '大连民族大学', '1996-02-26 00:00:00', '522321199502251217', '444569104@qq.com', '18342039199', '950226', '男', '1', null, 'wzl950226');
+INSERT INTO `t_user` VALUES ('22', '大连民族大学', '1996-02-26 00:00:00', '522321199502251217', '444569104@qq.com', '18342039199', '123', '男', '1', null, 'mario');

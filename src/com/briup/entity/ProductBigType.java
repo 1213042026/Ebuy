@@ -19,7 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name="t_bigType")
+@Table(name="t_bigtype")
 public class ProductBigType {
 
 	private int id=-1; // ±àºÅ

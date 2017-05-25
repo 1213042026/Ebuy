@@ -23,7 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name="t_smallType")
+@Table(name="t_smalltype")
 public class ProductSmallType {
 
 	private int id; // ±àºÅ
