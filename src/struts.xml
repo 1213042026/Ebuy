@@ -13,6 +13,10 @@
         	<result name="success">productMain.jsp</result>
         </action>
         
+        <action name="productCombination_*" class="com.briup.action.ProductCombinationAction" method="{1}">
+        	<result name="success">productCombinationMain.jsp</result>
+        </action>
+        
         <action name="news_*" class="com.briup.action.NewsAction" method="{1}">
         	<result name="success">newsMain.jsp</result>
         </action>

@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
 		if(pageBean!=null){
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
 		}else{
-			return null;
+			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
 		}
 	}
 	//获取商品数量

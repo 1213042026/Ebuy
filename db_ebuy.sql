@@ -272,3 +272,51 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('1', '山西太原尖草坪', '1976-09-04 00:00:00', '411522199407254576', 'admin@qq.com', '13523902576', 'admin', '女', '2', '张三', 'admin');
 INSERT INTO `t_user` VALUES ('22', '大连民族大学', '1996-02-26 00:00:00', '522321199502251217', '444569104@qq.com', '18342039199', '123', '男', '1', null, 'mario');
+
+----------------------
+DROP TABLE IF EXISTS `t_product_combination`;
+CREATE TABLE `t_product_combination` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(200) default NULL,
+  `price` varchar(200) default NULL,
+  `stock` varchar(50) default NULL,
+  `image` varchar(100) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+INSERT INTO `t_product_combination` VALUES ('1', 'kaixindalibao', '999.9', '200', '11.jpg');
+INSERT INTO `t_product_combination` VALUES ('2', 'chunjiedalibao', '9999', '100', '22.jpg');
+
+
+DROP TABLE IF EXISTS `t_combination_product`;
+CREATE TABLE `t_combination_product` (
+  `id` int(11) NOT NULL auto_increment,
+  `productCombinationId` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
+  `productName` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+INSERT INTO `t_combination_product` VALUES ('1', '1', '1', 'apple');
+INSERT INTO `t_combination_product` VALUES ('2', '1', '2', 'pea');
+INSERT INTO `t_combination_product` VALUES ('3', '1', '3', 'water');
+
+INSERT INTO `t_combination_product` VALUES ('4', '2', '1', 'apple');
+INSERT INTO `t_combination_product` VALUES ('5', '2', '2', 'pea');
+
+INSERT INTO `t_combination_product` VALUES ('6', '3', '2', 'pea');
+INSERT INTO `t_combination_product` VALUES ('7', '3', '3', 'water');
+
+INSERT INTO `t_combination_product` VALUES ('8', '4', '1', 'apple');
+INSERT INTO `t_combination_product` VALUES ('9', '4', '3', 'water');
+
+INSERT INTO `t_combination_product` VALUES ('10', '5', '11', 'jia');
+INSERT INTO `t_combination_product` VALUES ('11', '5', '12', 'yi');
+INSERT INTO `t_combination_product` VALUES ('12', '5', '13', 'bing');
+INSERT INTO `t_combination_product` VALUES ('13', '5', '14', 'ding');
+
+select productCombinationId from t_combination_product where productCombinationId in (
+  select productCombinationId from t_combination_product where productId in (1,2,3) group by productCombinationId having count(productCombinationId) = 3
+) group by productCombinationId having count(productCombinationId) =  3;
+
+SELECT GROUP_CONCAT(productId) AS ids, GROUP_CONCAT(productName) AS names FROM t_combination_product where productCombinationId = 1 GROUP BY productCombinationId;
