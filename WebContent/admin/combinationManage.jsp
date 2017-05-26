@@ -25,17 +25,24 @@
 	
 	function saveProductCombination(){
 		var selecteds = $("#combinationProducts").combogrid("grid").datagrid('getSelections');
-		console.log(selecteds.length)
-		console.log()
-		for(sl in selecteds) {
-			console.log(sl.id)
-			console.log(sl.name)
+		if (selecteds.length == 1) {
+			$("#ids").val() = selecteds[0].id;
+			$("#names").val(selecteds[0].name);
+		} else {
+			var names = [], ids = [];
+			for(var i = 0; i < selecteds.length;i++) {
+				names.push(selecteds[i].name)
+				ids.push(selecteds[i].id)
+			}
+			$("#ids").val(names.join(','));
+			$("#names").val(ids.join(','));
 		}
+		
 		return;
 		$("#fm").form("submit",{
 			url:url,
 			onSubmit:function(){
-				if($("#combinationProducts").combogrid("grid").datagrid('getSelected').length==""){
+				if($("#combinationProducts").combogrid("grid").datagrid('getSelections').length==0){
 					$.messager.alert("系统提示","请选择套餐商品");
 					return false;
 				}
@@ -169,6 +176,8 @@
 	 				<td>商品套餐图片：</td>
 	 				<td colspan="4"><input type="file" id="imageShow" name="image" /></td>
 	 				<input type="hidden" id="image" name="productCombination.image"/>
+	 				<input type="hidden" id="ids" name="productCombination.combinationProduct.ids"/>
+	 				<input type="hidden" id="names" name="productCombination.combinationProduct.names"/>
 	 			</tr>
 	 			<tr>
 	 				<td>商品套餐内容：</td>
@@ -188,7 +197,7 @@
 						{field:'stock',title:'商品库存',width:80,align:'right'}
 						]],
 						fitColumns: true
-						" name="productCombination.combinationProduct.ids">
+						">
 						</select>
 	 				</td>
 	 			</tr>
