@@ -34,7 +34,16 @@ public class ProductCombinationAction extends ActionSupport  implements ServletR
 	private File image;
 	private String imageFileName;
 	private String imageContentType;
+	private String ids;
 	
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+
 	public String getImageContentType() {
 		return imageContentType;
 	}
@@ -127,10 +136,32 @@ public class ProductCombinationAction extends ActionSupport  implements ServletR
 		}else if(StringUtil.isEmpty(productCombination.getImage())){
 			productCombination.setImage("");
 		}
-		System.out.println(productCombination);
 		productCombinationService.saveProductCombination(productCombination);
 		JSONObject result=new JSONObject();
 		result.put("success", true);
+		ResponseUtil.write(ServletActionContext.getResponse(), result);
+		return null;
+	}
+
+	public String delete()throws Exception{
+		JSONObject result=new JSONObject();
+		String []idsStr=ids.split(",");
+		for(int i=0;i<idsStr.length;i++){
+			productCombinationService.deleteCombination(idsStr[i]);
+		}
+		result.put("success", true);
+		ResponseUtil.write(ServletActionContext.getResponse(), result);
+		return null;
+	}
+	
+	public String getCombination()throws Exception{
+		JSONObject result=new JSONObject();
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[]{"combinationProduct"});
+		String ids = "1,2,3";
+		ProductCombination productCombination = productCombinationService.queryCombinationByProducts(ids);
+		JSONArray rows=JSONArray.fromObject(productCombination,jsonConfig);
+		result.put("data", rows);
 		ResponseUtil.write(ServletActionContext.getResponse(), result);
 		return null;
 	}

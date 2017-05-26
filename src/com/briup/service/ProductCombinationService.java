@@ -10,4 +10,6 @@ public interface ProductCombinationService {
 	public List<ProductCombination> findProductCombinationList(ProductCombination s_productCombination, PageBean pageBean);
 	public Long getProductCombinationCount(ProductCombination s_productCombination);
 	public void saveProductCombination(ProductCombination productCombination);
+	public void deleteCombination(String id);
+	public ProductCombination queryCombinationByProducts(String ids);
 }

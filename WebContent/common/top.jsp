@@ -64,6 +64,9 @@
 				<a href="product.action?s_product.bigType.id=${bigType.id }">${bigType.name }</a>
 			</li>
 		</c:forEach>
+		<li>
+			<a href="product_listCombinationProduct.action?s_product.combine=1">商品套餐</a>
+		</li>
 	</ul>
 </div>
 

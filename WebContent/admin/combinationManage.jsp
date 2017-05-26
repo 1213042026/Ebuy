@@ -24,27 +24,25 @@
 	}
 	
 	function saveProductCombination(){
-		var selecteds = $("#combinationProducts").combogrid("grid").datagrid('getSelections');
-		if (selecteds.length == 1) {
-			$("#ids").val() = selecteds[0].id;
-			$("#names").val(selecteds[0].name);
-		} else {
-			var names = [], ids = [];
-			for(var i = 0; i < selecteds.length;i++) {
-				names.push(selecteds[i].name)
-				ids.push(selecteds[i].id)
-			}
-			$("#ids").val(names.join(','));
-			$("#names").val(ids.join(','));
-		}
-		
-		return;
 		$("#fm").form("submit",{
 			url:url,
 			onSubmit:function(){
 				if($("#combinationProducts").combogrid("grid").datagrid('getSelections').length==0){
 					$.messager.alert("系统提示","请选择套餐商品");
 					return false;
+				}
+				var selecteds = $("#combinationProducts").combogrid("grid").datagrid('getSelections');
+				if (selecteds.length == 1) {
+					$("#ids").val(selecteds[0].id);
+					$("#names").val(selecteds[0].name);
+				} else {
+					var names = [], ids = [];
+					for(var i = 0; i < selecteds.length;i++) {
+						names.push(selecteds[i].name)
+						ids.push(selecteds[i].id)
+					}
+					$("#ids").val(ids.join(','));
+					$("#names").val(names.join(','));
 				}
 				return $(this).form("validate");
 			},
@@ -138,6 +136,7 @@
 	 		<th field="id" width="50" align="center">编号</th>
 	 		<th field="name" width="100" align="center">商品套餐名称</th>
 	 		<th field="price" width="100" align="center">商品套餐价格</th>
+	 		<th field="stock" width="50" align="center">商品套餐库存</th>
 	 		<th field="image" formatter="formatImage" width="100" align="center">商品套餐图片</th>
 	 		<th field="combinationProduct.names" formatter="formatCombinationProductNames" width="100" align="center">商品套餐内容</th>
 	 	</tr>

@@ -49,4 +49,43 @@ public class ProductCombinationDaoImpl {
 		}
 		return list;
 	}
+
+	public void save(ProductCombination productCombination) {
+		if (productCombination.getId() == 0) {
+			this.getCurrentSession().save(productCombination);
+		} else {
+			this.getCurrentSession().merge(productCombination);
+			String deleteSQL = "delete from t_combination_product where productCombinationId = " + productCombination.getId();
+			this.getCurrentSession().createSQLQuery(deleteSQL).executeUpdate();
+		}
+		String ids[] = productCombination.getCombinationProduct().getIds().split(",");
+		String names[] = productCombination.getCombinationProduct().getNames().split(",");
+		String id = "";
+		String name = "";
+		String sql = "";
+		for (int i = 0; i< ids.length;i++) {
+			id = ids[i];
+			name = names[i];
+			sql = "insert into t_combination_product(productCombinationId, productId, productName) values(" + productCombination.getId() + "," + id + ",'" + name + "');";
+			this.getCurrentSession().createSQLQuery(sql).executeUpdate();
+		}
+	}
+
+	public void deleteById(String id) {
+		String deleteSQL = "delete from t_combination_product where productCombinationId = " + id;
+		this.getCurrentSession().createSQLQuery(deleteSQL).executeUpdate();
+		deleteSQL = "delete from t_product_combination where id = " + id;
+		this.getCurrentSession().createSQLQuery(deleteSQL).executeUpdate();
+	}
+	
+	public ProductCombination queryCombinationByIds(String ids) {
+		int count = ids.split(",").length;
+		String sql = "select * from t_product_combination where id = (select productCombinationId from t_combination_product where productCombinationId in " +
+  "(select productCombinationId from t_combination_product where productId in (" + ids + ") group by productCombinationId having count(productCombinationId) = " + count + ")" + 
+  " group by productCombinationId having count(productCombinationId) =  " + count +");";
+		List res = this.getCurrentSession().createSQLQuery(sql).addScalar("id", StandardBasicTypes.INTEGER).addScalar("name", StandardBasicTypes.STRING).addScalar("price", StandardBasicTypes.STRING).addScalar("stock", StandardBasicTypes.STRING).addScalar("image", StandardBasicTypes.STRING).list();
+		Object[] objects = (Object[])res.get(0);
+		
+		return new ProductCombination(Integer.valueOf(objects[0].toString()), objects[1].toString(), objects[2].toString(), objects[3].toString(), objects[4].toString());
+	}
 }

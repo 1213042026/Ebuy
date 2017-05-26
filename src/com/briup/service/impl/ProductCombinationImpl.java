@@ -50,7 +50,14 @@ public class ProductCombinationImpl implements ProductCombinationService {
 	}
 
 	public void saveProductCombination(ProductCombination productCombination) {
-		baseDAO.merge(productCombination);
-		System.out.println(productCombination.getId());
+		productCombinationDaoImpl.save(productCombination);
+	}
+
+	public void deleteCombination(String id) {
+		productCombinationDaoImpl.deleteById(id);
+	}
+	
+	public ProductCombination queryCombinationByProducts(String ids) {
+		return productCombinationDaoImpl.queryCombinationByIds(ids);
 	}
 }

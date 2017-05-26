@@ -19,6 +19,15 @@ public class ProductCombination {
 
 	private CombinationProduct combinationProduct = new CombinationProduct();
 
+	public ProductCombination(int id, String name, String price, String stock,
+			String image) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+		this.image = image;
+	}
+
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")

@@ -76,8 +76,20 @@ public class ProductAction extends ActionSupport  implements ServletRequestAware
 	private String proPicFileName;
 	
 	private String ids;
+	private List<Product> combinationProductList;
 	
-	
+	public List<Product> getCombinationProductList() {
+		return combinationProductList;
+	}
+
+
+
+	public void setCombinationProductList(List<Product> combinationProductList) {
+		this.combinationProductList = combinationProductList;
+	}
+
+
+
 	public File getProPic() {
 		return proPic;
 	}
@@ -292,19 +304,10 @@ public class ProductAction extends ActionSupport  implements ServletRequestAware
 	}
 
 	public String listCombinationProduct()throws Exception{
-		List<Product> productList=productService.findProductList(s_product, null);
-		long total=productService.getProductCount(s_product);
-		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.setExcludes(new String[]{"orderProductList"});
-		jsonConfig.registerJsonValueProcessor(ProductSmallType.class, new ObjectJsonValueProcessor(new String[]{"id","name"}, ProductSmallType.class));
-		jsonConfig.registerJsonValueProcessor(ProductBigType.class, new ObjectJsonValueProcessor(new String[]{"id","name"}, ProductBigType.class));
-		jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));  
-		JSONArray rows=JSONArray.fromObject(productList,jsonConfig);
-		JSONObject result=new JSONObject();
-		result.put("rows", rows);
-		result.put("total", total);
-		ResponseUtil.write(ServletActionContext.getResponse(), result);
-		return null;
+		combinationProductList=productService.findProductList(s_product, null);
+		mainPage="product/combinationProductList.jsp";
+		navCode=NavUtil.genNavCode("商品列表");
+		return SUCCESS;
 	}
 	
 	/**
