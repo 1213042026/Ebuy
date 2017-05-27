@@ -186,7 +186,7 @@
 						multiple: true,
 						idField: 'id',
 						textField: 'name',
-						url: 'product_listCombinationProduct.action?s_product.combine=1',
+						url: 'product_listCombinationProductAjax.action?s_product.combine=1',
 						method: 'get',
 						columns: [[
 						{field:'ck',checkbox:true},

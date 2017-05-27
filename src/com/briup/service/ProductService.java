@@ -45,6 +45,8 @@ public interface ProductService {
 	 */
 	public void saveProduct(Product product);
 	
+	public int saveProductAsSQL(Product product);
+	
 	/**
 	 * É¾³ýÉÌÆ·
 	 * @param product

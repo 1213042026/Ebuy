@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.briup.dao.BaseDAO;
+import com.briup.dao.impl.ProductDaoImpl;
 import com.briup.entity.PageBean;
 import com.briup.entity.Product;
 import com.briup.service.ProductService;
@@ -25,6 +26,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Resource
 	private BaseDAO<Product> baseDAO;
+	
+	@Resource
+	private ProductDaoImpl productDaoImpl;
 	//分页查询商品
 	public List<Product> findProductList(Product s_product, PageBean pageBean) {
 		List<Object> param=new LinkedList<Object>();
@@ -100,6 +104,11 @@ public class ProductServiceImpl implements ProductService {
 	public void saveProduct(Product product) {
 		// TODO Auto-generated method stub
 		baseDAO.merge(product);
+	}
+	
+	public int saveProductAsSQL(Product product) {
+		// TODO Auto-generated method stub
+		return productDaoImpl.save(product);
 	}
 	//删除商品
 	public void deleteProduct(Product product) {

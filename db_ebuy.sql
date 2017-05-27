@@ -314,9 +314,3 @@ INSERT INTO `t_combination_product` VALUES ('10', '5', '11', 'jia');
 INSERT INTO `t_combination_product` VALUES ('11', '5', '12', 'yi');
 INSERT INTO `t_combination_product` VALUES ('12', '5', '13', 'bing');
 INSERT INTO `t_combination_product` VALUES ('13', '5', '14', 'ding');
-
-select productCombinationId from t_combination_product where productCombinationId in (
-  select productCombinationId from t_combination_product where productId in (1,2,3) group by productCombinationId having count(productCombinationId) = 3
-) group by productCombinationId having count(productCombinationId) =  3;
-
-SELECT GROUP_CONCAT(productId) AS ids, GROUP_CONCAT(productName) AS names FROM t_combination_product where productCombinationId = 1 GROUP BY productCombinationId;

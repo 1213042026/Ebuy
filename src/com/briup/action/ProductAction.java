@@ -303,6 +303,22 @@ public class ProductAction extends ActionSupport  implements ServletRequestAware
 		return null;
 	}
 
+	public String listCombinationProductAjax()throws Exception{
+		List<Product> productList=productService.findProductList(s_product, null);
+		long total=productService.getProductCount(s_product);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[]{"orderProductList"});
+		jsonConfig.registerJsonValueProcessor(ProductSmallType.class, new ObjectJsonValueProcessor(new String[]{"id","name"}, ProductSmallType.class));
+		jsonConfig.registerJsonValueProcessor(ProductBigType.class, new ObjectJsonValueProcessor(new String[]{"id","name"}, ProductBigType.class));
+		jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));  
+		JSONArray rows=JSONArray.fromObject(productList,jsonConfig);
+		JSONObject result=new JSONObject();
+		result.put("rows", rows);
+		result.put("total", total);
+		ResponseUtil.write(ServletActionContext.getResponse(), result);
+		return null;
+	}
+
 	public String listCombinationProduct()throws Exception{
 		combinationProductList=productService.findProductList(s_product, null);
 		mainPage="product/combinationProductList.jsp";
@@ -375,6 +391,14 @@ public class ProductAction extends ActionSupport  implements ServletRequestAware
 		productService.saveProduct(product);
 		JSONObject result=new JSONObject();
 		result.put("success", true);
+		ResponseUtil.write(ServletActionContext.getResponse(), result);
+		return null;
+	}
+
+	public String saveWithoutFile()throws Exception{
+		int id = productService.saveProductAsSQL(product);
+		JSONObject result=new JSONObject();
+		result.put("id", id);
 		ResponseUtil.write(ServletActionContext.getResponse(), result);
 		return null;
 	}

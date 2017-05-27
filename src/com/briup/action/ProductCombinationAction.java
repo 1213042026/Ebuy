@@ -1,6 +1,7 @@
 package com.briup.action;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -158,7 +159,6 @@ public class ProductCombinationAction extends ActionSupport  implements ServletR
 		JSONObject result=new JSONObject();
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(new String[]{"combinationProduct"});
-		String ids = "1,2,3";
 		ProductCombination productCombination = productCombinationService.queryCombinationByProducts(ids);
 		JSONArray rows=JSONArray.fromObject(productCombination,jsonConfig);
 		result.put("data", rows);

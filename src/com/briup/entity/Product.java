@@ -152,8 +152,11 @@ public class Product {
 	public void setCombine(int combine) {
 		this.combine = combine;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", stock=" + stock + ", proPic=" + proPic
+				+ "]";
+	}
 	
 	
 }

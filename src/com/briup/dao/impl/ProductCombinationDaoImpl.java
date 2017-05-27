@@ -84,6 +84,10 @@ public class ProductCombinationDaoImpl {
   "(select productCombinationId from t_combination_product where productId in (" + ids + ") group by productCombinationId having count(productCombinationId) = " + count + ")" + 
   " group by productCombinationId having count(productCombinationId) =  " + count +");";
 		List res = this.getCurrentSession().createSQLQuery(sql).addScalar("id", StandardBasicTypes.INTEGER).addScalar("name", StandardBasicTypes.STRING).addScalar("price", StandardBasicTypes.STRING).addScalar("stock", StandardBasicTypes.STRING).addScalar("image", StandardBasicTypes.STRING).list();
+		if (res.size() == 0) {
+			return new ProductCombination();
+		}
+		
 		Object[] objects = (Object[])res.get(0);
 		
 		return new ProductCombination(Integer.valueOf(objects[0].toString()), objects[1].toString(), objects[2].toString(), objects[3].toString(), objects[4].toString());

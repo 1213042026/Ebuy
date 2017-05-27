@@ -19,6 +19,9 @@ public class ProductCombination {
 
 	private CombinationProduct combinationProduct = new CombinationProduct();
 
+	public ProductCombination() {
+	}
+
 	public ProductCombination(int id, String name, String price, String stock,
 			String image) {
 		this.id = id;
